@@ -8,8 +8,8 @@ var path = require('path');
 var morgan = require('morgan');
 var fs = require('fs');
 var rfs = require('rotating-file-stream');
-
-var markerWatchRoute = require('./routes/marker_watch');
+var singleWatchRoute = require('./routes/single_watch');
+var marketWatchRoute = require('./routes/market_watch');
 var logDirectory = path.join(__dirname, './logs');
 var apiLogDirectory = path.join(__dirname, './logs/api');
 var httpRequestLogDirectory = path.join(__dirname, './logs/http');
@@ -36,23 +36,30 @@ var httpRequestLogStream = rfs('request.log', {
 });
 
 // Application settings
-app.engine('html',require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', './views');
 
-app.locals.siteTitle = 'Node app';
+app.locals.siteTitle = 'Share Watch app';
 
 // Middlewares
 app.use(morgan('combined', {
   stream: httpRequestLogStream
 }));
-app.use('/static', express.static('./bower_components', {
-  index: false,
-  redirect: false
-}));
+// app.use('/static', express.static('./bower_components', {
+//   index: false,
+//   redirect: false
+// }));
 
 // Routes
-app.use('/api/markerWatch', markerWatchRoute);
+app.use('/', singleWatchRoute);
+app.use('/api/marketWatch', marketWatchRoute);
+app.use(express.static(path.join(__dirname, 'assets/fonts')));
+app.use(express.static(path.join(__dirname, 'assets/images')));
+app.use(express.static(path.join(__dirname, 'assets/javascripts')));
+app.use(express.static(path.join(__dirname, 'assets/stylesheets')));
+app.use(express.static(path.join(__dirname, 'views')));
+
 
 // Middleware for error handler
 app.use(function(err,req,res,next) {
