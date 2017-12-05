@@ -1,1 +1,27 @@
-<h1> hi </h1>
+<form>
+  <div class="row">
+    <div class="col-sm-12 col-xl-10 offset-xl-1 form-group">
+      <input type="text" class="form-control" id="scrip_name" aria-describedby="emailHelp" placeholder="Ex: APEX" ng-model="scrip.name">
+      <small id="emailHelp" class="form-text text-muted">Enter Stock name and choose either NSE or BSE </small>
+    </div>
+    <div class="col-sm-12 col-xl-6 offset-xl-4">
+      <div class="row">
+        <div class="col-sm-12 col-xl-4">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="NSE" value="NSE" ng-model="scrip.type"> NSE
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="BSE" value="BSE" ng-model="scrip.type"> BSE
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xl-6 form-check">
+          <button class="btn btn-primary" ng-click="search_scrip()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
