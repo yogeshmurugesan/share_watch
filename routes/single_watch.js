@@ -21,4 +21,16 @@ router.get('/', function(req, res) {
   res.render('layout', {title: "Share Watch App"});
 });
 
+router.get('/singleWatch', function(req, res) {
+  var stock = {
+    name: req.query.name,
+    market: req.query.market
+  };
+  var resultPromise = marketWatchService.getMarketDepth(stock);
+  resultPromise.then(function(response) {
+    res.json(response);
+    res.end();
+  });
+});
+
 module.exports = router;

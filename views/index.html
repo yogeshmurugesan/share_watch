@@ -1,7 +1,7 @@
 <form>
   <div class="row">
     <div class="col-sm-12 col-xl-10 offset-xl-1 form-group">
-      <input type="text" class="form-control" id="scrip_name" aria-describedby="emailHelp" placeholder="Ex: APEX" ng-model="scrip.name">
+      <input type="text" class="form-control" id="scrip_name" aria-describedby="emailHelp" required placeholder="Ex: APEX" ng-model="scrip.name">
       <small id="emailHelp" class="form-text text-muted">Enter Stock name and choose either NSE or BSE </small>
     </div>
     <div class="col-sm-12 col-xl-6 offset-xl-4">
@@ -9,19 +9,128 @@
         <div class="col-sm-12 col-xl-4">
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="NSE" value="NSE" ng-model="scrip.type"> NSE
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="NSE" value="NSE" ng-model="scrip.market"> NSE
             </label>
           </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="BSE" value="BSE" ng-model="scrip.type"> BSE
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="BSE" value="BSE" ng-model="scrip.market"> BSE
             </label>
           </div>
         </div>
         <div class="col-sm-12 col-xl-6 form-check">
           <button class="btn btn-primary" ng-click="search_scrip()">Submit</button>
+          <button class="btn btn-secondary" ng-click="stop_scrip()">Stop</button>
         </div>
       </div>
     </div>
   </div>
 </form>
+
+<hr>
+
+<div class="row">
+  <div class="col-sm-6 col-xl-5 offset-xl-1 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Buyers</th>
+          <th scope="col">Bid Quantity</th>
+          <th scope="col">Bid Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{marketDepthData.BNO1}}</td>
+          <td>{{marketDepthData.BBQ1}}</td>
+          <td>{{marketDepthData.BBR1}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.BNO2}}</td>
+          <td>{{marketDepthData.BBQ2}}</td>
+          <td>{{marketDepthData.BBR2}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.BNO3}}</td>
+          <td>{{marketDepthData.BBQ3}}</td>
+          <td>{{marketDepthData.BBR3}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.BNO4}}</td>
+          <td>{{marketDepthData.BBQ4}}</td>
+          <td>{{marketDepthData.BBR4}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.BNO5}}</td>
+          <td>{{marketDepthData.BBQ5}}</td>
+          <td>{{marketDepthData.BBR5}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6 col-xl-5 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sellers</th>
+          <th scope="col">Offer Quantity</th>
+          <th scope="col">Offer Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{marketDepthData.SNO1}}</td>
+          <td>{{marketDepthData.BSQ1}}</td>
+          <td>{{marketDepthData.BSR1}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.SNO2}}</td>
+          <td>{{marketDepthData.BSQ2}}</td>
+          <td>{{marketDepthData.BSR2}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.SNO3}}</td>
+          <td>{{marketDepthData.BSQ3}}</td>
+          <td>{{marketDepthData.BSR3}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.SNO4}}</td>
+          <td>{{marketDepthData.BSQ4}}</td>
+          <td>{{marketDepthData.BSR4}}</td>
+        </tr>
+        <tr>
+          <td>{{marketDepthData.SNO5}}</td>
+          <td>{{marketDepthData.BSQ5}}</td>
+          <td>{{marketDepthData.BSR5}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-sm-12 col-xl-10 offset-xl-1 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Open</th>
+          <th scope="col">High</th>
+          <th scope="col">Low</th>
+          <th scope="col">Pre Close</th>
+          <th scope="col">Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{marketDepthData.open}}</td>
+          <td>{{marketDepthData.high}}</td>
+          <td>{{marketDepthData.low}}</td>
+          <td>{{marketDepthData.precls}}</td>
+          <td>{{marketDepthData.open}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
