@@ -5,6 +5,9 @@ shareWatch.controller("singleWatchController", function ($scope, $http, $timeout
     market: "NSE"
   };
   $scope.marketDepthData = null;
+  $scope.invalidScripName = false;
+  $scope.marketWatchStop = false;
+
   $scope.search_scrip = function(){
     if ($scope.scrip.name != undefined){
       $scope.scrip.name = $scope.scrip.name.toUpperCase();
@@ -14,6 +17,7 @@ shareWatch.controller("singleWatchController", function ($scope, $http, $timeout
 
   $scope.stop_scrip = function(){
     $timeout.cancel(timer);
+    $scope.marketWatchStop = true;
   };
 
   function triggerSingleWatch(){
@@ -28,9 +32,16 @@ shareWatch.controller("singleWatchController", function ($scope, $http, $timeout
     .then(function successCallback(response) {
       responseData = response.data;
       $scope.marketDepthData = responseData[$scope.scrip.name + "-" + $scope.scrip.market];
-      timer = $timeout(triggerSingleWatch, 2500);
+      if ($scope.marketDepthData["error"]){
+        $scope.marketDepthData = null;
+        $scope.invalidScripName = true;
+        $timeout.cancel(timer);
+      } else {
+        timer = $timeout(triggerSingleWatch, 2500);
+      }
     }, function errorCallback(response) {
       console.log(response);
     });
   };
 });
+
